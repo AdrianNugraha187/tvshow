@@ -1,13 +1,17 @@
 import { useSearchParams } from "react-router";
 import { useTvShow } from "../hooks/useTvShow";
-import TvShowForm from "./TvShowForm";
-import Loading from "./ui/Loading";
-import TvShowCard from "./TvShowCard";
+import TvShowForm from "../components/tvshow/TvShowForm";
+import Loading from "../components/ui/Loading";
+import TvShowCard from "../components/tvshow/TvShowCard";
 import { useState } from "react";
+import { useTvShowStore } from "../store/useTvShowStore";
 
 export default function TvShowPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
+
+  const addFavorite = useTvShowStore((state) => state.addFavorite);
+  // const removeFavorite = useTvShowStore((state) => state.removeFavorite);
 
   const tvShowSearch = searchParams.get("tvshow") || "";
 
@@ -41,7 +45,7 @@ export default function TvShowPage() {
         <>
           <div>
             {currentTvShows?.map((item) => (
-              <TvShowCard key={item.id} show={item} />
+              <TvShowCard key={item.id} show={item} onFavorite={addFavorite} />
             ))}
           </div>
 

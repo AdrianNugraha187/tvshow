@@ -5,7 +5,8 @@ import HeroSection from "./pages/HomePage";
 import About from "./pages/About";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import TvShowPage from "./components/TvShowPage";
+import TvShowPage from "./pages/TvShowPage";
+import TvShowFavorite from "./components/tvshow/TvShowFavorite";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "tvshowpage",
         Component: TvShowPage,
+      },
+      {
+        path: "favorit",
+        Component: TvShowFavorite,
       },
     ],
   },
