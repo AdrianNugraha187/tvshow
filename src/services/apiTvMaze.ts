@@ -13,8 +13,6 @@ export async function fetchShow(searchTvShow?: string): Promise<Show[]> {
   const data = await res.json();
 
   if (searchTvShow) {
-    // data bertipe SearchShowResponse[]
-    // Ekstrak properti .show dari tiap elemen array menggunakan .map()
     return (data as SearchShowResponse[]).map((item) => item.show);
   }
 
