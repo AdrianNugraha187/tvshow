@@ -4,8 +4,8 @@ import AppLayout from "./layouts/AppLayout";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
-// import TvShowPage from "./pages/TvShowPage";
 import TvShowFavorite from "./components/tvshow/TvShowFavorite";
+import TvShowDetail from "./components/tvshow/TvShowDetail";
 import "./App.css";
 
 const queryClient = new QueryClient();
@@ -24,10 +24,10 @@ const router = createBrowserRouter([
         path: "about",
         Component: About,
       },
-      // {
-      //   path: "tvshowpage",
-      //   Component: TvShowPage,
-      // },
+      {
+        path: "tvshowdetail/:id",
+        Component: TvShowDetail,
+      },
       {
         path: "favorit",
         Component: TvShowFavorite,

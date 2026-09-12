@@ -1,17 +1,18 @@
 import { useSearchParams } from "react-router";
 import { useTvShow } from "../../hooks/useTvShow";
 import { useTvShowStore } from "../../store/useTvShowStore";
-import { useState, useEffect } from "react";
-import TvShowForm from "./TvShowForm";
+// import { useState, useEffect } from "react";
 import Loading from "../ui/Loading";
 import TvShowCard from "./TvShowCard";
 
 export default function TvShowPage() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const addFavorite = useTvShowStore((state) => state.addFavorite);
   const tvShowSearch = searchParams.get("tvshow") || "";
+
+  // 1. Ambil halaman dari URL, default ke 1 jika tidak ada/invalid
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
   const { data, isError, error, isLoading } = useTvShow(tvShowSearch);
 
@@ -19,18 +20,17 @@ export default function TvShowPage() {
   const totalItems = data?.length || 0;
   const totalPages = Math.ceil(totalItems / tvShowPerPage);
 
-  // Reset ke halaman 1 setiap kali kata kunci pencarian berganti
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [tvShowSearch]);
-
   const startIndex = (currentPage - 1) * tvShowPerPage;
   const endIndex = startIndex + tvShowPerPage;
   const currentTvShows = data?.slice(startIndex, endIndex);
 
-  // Handler ganti halaman dengan scroll halus ke bagian atas katalog
+  // 2. Update URL saat ganti halaman (secara otomatis reset jika tvShowSearch berubah)
   const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
+    setSearchParams((prev) => {
+      prev.set("page", newPage.toString());
+      return prev;
+    });
+
     const catalogElement = document.getElementById("catalog-top");
     if (catalogElement) {
       catalogElement.scrollIntoView({ behavior: "smooth" });
@@ -39,29 +39,28 @@ export default function TvShowPage() {
 
   return (
     <div id="catalog-top" className="w-full space-y-8">
-      {/* 1. SECTION FORM & FILTER */}
-      <section className="bg-zinc-900/60 p-4 sm:p-6 rounded-2xl border border-zinc-800/80 backdrop-blur-sm shadow-xl">
-        <TvShowForm />
-      </section>
-
       {/* 2. KETERANGAN PENCARIAN / STATS */}
       {!isLoading && !isError && (
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm text-zinc-400 px-1">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm text-zinc-600 dark:text-zinc-400 px-1">
           <div>
             {tvShowSearch ? (
               <p>
                 Hasil pencarian untuk:{" "}
-                <span className="font-semibold text-white">
+                <span className="font-semibold text-zinc-900 dark:text-white">
                   "{tvShowSearch}"
                 </span>
               </p>
             ) : (
-              <p className="font-medium text-zinc-300">Semua Serial TV</p>
+              <p className="font-medium text-zinc-700 dark:text-zinc-300">
+                Semua Serial TV
+              </p>
             )}
           </div>
           <p className="text-xs sm:text-sm text-zinc-500">
             Ditemukan{" "}
-            <span className="font-semibold text-zinc-300">{totalItems}</span>{" "}
+            <span className="font-semibold text-zinc-700 dark:text-zinc-300">
+              {totalItems}
+            </span>{" "}
             serial TV
           </p>
         </div>
@@ -71,7 +70,7 @@ export default function TvShowPage() {
       {isLoading && (
         <div className="flex flex-col items-center justify-center py-24">
           <Loading />
-          <p className="mt-4 text-sm text-zinc-400 animate-pulse">
+          <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400 animate-pulse">
             Memuat serial TV favorit Anda...
           </p>
         </div>
@@ -79,9 +78,9 @@ export default function TvShowPage() {
 
       {/* 4. ERROR STATE */}
       {isError && (
-        <div className="p-4 rounded-xl bg-red-950/40 border border-red-800/60 text-red-300 flex items-center gap-3">
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300 flex items-center gap-3">
           <svg
-            className="w-5 h-5 shrink-0 text-red-400"
+            className="w-5 h-5 shrink-0 text-red-500 dark:text-red-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -101,8 +100,8 @@ export default function TvShowPage() {
 
       {/* 5. EMPTY STATE (TIDAK ADA HASIL) */}
       {!isLoading && !isError && totalItems === 0 && (
-        <div className="text-center py-20 px-4 bg-zinc-900/30 rounded-2xl border border-zinc-800/60 flex flex-col items-center">
-          <div className="w-16 h-16 mb-4 rounded-full bg-zinc-800/80 flex items-center justify-center text-zinc-500">
+        <div className="text-center py-20 px-4 bg-zinc-100 dark:bg-zinc-900/30 rounded-2xl border border-zinc-200 dark:border-zinc-800/60 flex flex-col items-center">
+          <div className="w-16 h-16 mb-4 rounded-full bg-zinc-200 dark:bg-zinc-800/80 flex items-center justify-center text-zinc-500">
             <svg
               className="w-8 h-8"
               fill="none"
@@ -117,10 +116,10 @@ export default function TvShowPage() {
               />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-white">
+          <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">
             Tidak ada serial TV ditemukan
           </h3>
-          <p className="text-sm text-zinc-400 mt-1 max-w-sm">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-sm">
             Serial dengan kata kunci tersebut tidak tersedia. Coba gunakan kata
             kunci lain.
           </p>
@@ -143,18 +142,20 @@ export default function TvShowPage() {
 
           {/* 7. PAGINATION SECTION */}
           {totalPages > 1 && (
-            <div className="pt-8 border-t border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="text-xs sm:text-sm text-zinc-400 order-2 sm:order-1">
+            <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <span className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 order-2 sm:order-1">
                 Menampilkan{" "}
-                <span className="font-semibold text-white">
+                <span className="font-semibold text-zinc-900 dark:text-white">
                   {startIndex + 1}
                 </span>{" "}
                 -{" "}
-                <span className="font-semibold text-white">
+                <span className="font-semibold text-zinc-900 dark:text-white">
                   {Math.min(endIndex, totalItems)}
                 </span>{" "}
                 dari{" "}
-                <span className="font-semibold text-white">{totalItems}</span>{" "}
+                <span className="font-semibold text-zinc-900 dark:text-white">
+                  {totalItems}
+                </span>{" "}
                 serial
               </span>
 
@@ -163,7 +164,7 @@ export default function TvShowPage() {
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 rounded-xl text-sm font-medium bg-zinc-900 border border-zinc-800 text-zinc-200 hover:bg-zinc-800 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-zinc-900 transition-all flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl text-sm font-medium bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-zinc-100 dark:disabled:hover:bg-zinc-900 transition-all flex items-center gap-1.5"
                 >
                   <svg
                     className="w-4 h-4"
@@ -181,7 +182,7 @@ export default function TvShowPage() {
                   <span>Prev</span>
                 </button>
 
-                <div className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-zinc-900/80 border border-zinc-800 text-zinc-300">
+                <div className="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                   <span className="text-red-500">{currentPage}</span> /{" "}
                   {totalPages}
                 </div>
@@ -189,7 +190,7 @@ export default function TvShowPage() {
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage >= totalPages}
-                  className="px-4 py-2 rounded-xl text-sm font-medium bg-zinc-900 border border-zinc-800 text-zinc-200 hover:bg-zinc-800 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-zinc-900 transition-all flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl text-sm font-medium bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-zinc-100 dark:disabled:hover:bg-zinc-900 transition-all flex items-center gap-1.5"
                 >
                   <span>Next</span>
                   <svg
@@ -213,4 +214,13 @@ export default function TvShowPage() {
       )}
     </div>
   );
+}
+
+{
+  /* 1. SECTION FORM & FILTER */
+}
+{
+  /* <section className="bg-zinc-900/60 p-4 sm:p-6 rounded-2xl border border-zinc-800/80 backdrop-blur-sm shadow-xl">
+        <TvShowForm />
+      </section> */
 }

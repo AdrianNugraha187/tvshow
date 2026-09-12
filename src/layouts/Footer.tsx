@@ -4,7 +4,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-zinc-950 border-t border-zinc-800/80 text-zinc-400 font-sans">
+    <footer className="w-full bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800/80 text-zinc-600 dark:text-zinc-400 font-sans transition-colors">
       {/* Bagian Konten Utama Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="space-y-4">
             <Link
               to="/"
-              className=" items-center gap-1.5 text-2xl font-black tracking-wider text-white group inline-block"
+              className=" items-center gap-1.5 text-2xl font-black tracking-wider text-zinc-900 dark:text-white group inline-block"
             >
               <span className="p-1 rounded bg-red-600 text-white font-extrabold text-sm leading-none">
                 TV
@@ -21,7 +21,7 @@ export default function Footer() {
                 SHOW
               </span>
             </Link>
-            <p className="text-sm text-zinc-400 leading-relaxed">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               Platform katalog serial TV interaktif untuk mencari serial
               favorit, jadwal penayangan, ringkasan cerita, dan menyimpan serial
               pilihan Anda.
@@ -32,7 +32,7 @@ export default function Footer() {
                 href="https://github.com/AdrianNugraha187/tvshow"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-200 hover:text-white transition-all hover:scale-[1.02] active:scale-95"
+                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-all hover:scale-[1.02] active:scale-95"
               >
                 {/* GitHub Icon */}
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -49,19 +49,22 @@ export default function Footer() {
 
           {/* Kolom 2: Navigasi Cepat */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">
+            <h3 className="text-sm font-semibold text-zinc-900 dark:text-white tracking-wider uppercase">
               Navigasi
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/" className="hover:text-red-400 transition-colors">
+                <Link
+                  to="/"
+                  className="hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                >
                   Beranda
                 </Link>
               </li>
               <li>
                 <Link
                   to="/favorites"
-                  className="hover:text-red-400 transition-colors"
+                  className="hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
                   Serial Favorit
                 </Link>
@@ -69,7 +72,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/about"
-                  className="hover:text-red-400 transition-colors"
+                  className="hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
                   Tentang Aplikasi
                 </Link>
@@ -79,10 +82,10 @@ export default function Footer() {
 
           {/* Kolom 3: Informasi Sumber API (TVmaze) */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">
+            <h3 className="text-sm font-semibold text-zinc-900 dark:text-white tracking-wider uppercase">
               Sumber Data API
             </h3>
-            <p className="text-sm text-zinc-400 leading-relaxed">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               Seluruh metadata, deskripsi, gambar poster, dan jadwal episode
               disediakan langsung secara gratis oleh:
             </p>
@@ -91,7 +94,7 @@ export default function Footer() {
                 href="https://www.tvmaze.com/api"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors group"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 transition-colors group"
               >
                 <span>TVmaze REST API</span>
                 {/* External Link Icon */}
@@ -110,27 +113,27 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
-            <span className="inline-block px-2.5 py-1 text-[11px] font-medium bg-emerald-950/40 border border-emerald-800/40 text-emerald-300 rounded-md">
+            <span className="inline-block px-2.5 py-1 text-[11px] font-medium bg-emerald-100 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/40 text-emerald-700 dark:text-emerald-300 rounded-md">
               Fast & Free Public API
             </span>
           </div>
 
           {/* Kolom 4: Tech Stack & Developer */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">
+            <h3 className="text-sm font-semibold text-zinc-900 dark:text-white tracking-wider uppercase">
               Dibuat Dengan
             </h3>
             <div className="flex flex-wrap gap-2 text-xs">
-              <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300">
+              <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                 React
               </span>
-              <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300">
+              <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                 React Router
               </span>
-              <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300">
+              <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                 Tailwind CSS
               </span>
-              <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300">
+              <span className="px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                 Zustand
               </span>
             </div>
@@ -140,7 +143,7 @@ export default function Footer() {
                 href="https://github.com/AdrianNugraha187"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-300 hover:underline font-medium"
+                className="text-zinc-700 dark:text-zinc-300 hover:underline font-medium"
               >
                 Adrian Nugraha
               </a>
@@ -150,12 +153,14 @@ export default function Footer() {
       </div>
 
       {/* Bagian Bawah: Copyright & Disclaimer */}
-      <div className="border-t border-zinc-900 bg-zinc-950/80">
+      <div className="border-t border-zinc-200 dark:border-zinc-900 bg-zinc-100/80 dark:bg-zinc-950/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
           <p>
             &copy; {currentYear}{" "}
-            <span className="text-zinc-300 font-medium">TVSHOW</span>. Proyek
-            open-source untuk portofolio.
+            <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+              TVSHOW
+            </span>
+            . Proyek open-source untuk portofolio.
           </p>
           <p className="text-center sm:text-right">
             Data dan gambar dilindungi hak cipta oleh masing-masing pemilik
@@ -164,7 +169,7 @@ export default function Footer() {
               href="https://www.tvmaze.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-zinc-300 underline"
+              className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-300 underline"
             >
               TVmaze.com
             </a>

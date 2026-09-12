@@ -28,9 +28,9 @@ export default function TvShowFavorite() {
   if (!tvShowFavorite || tvShowFavorite.length === 0) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-4 py-16">
-        <div className="text-center max-w-md mx-auto p-8 rounded-3xl bg-zinc-900/40 border border-zinc-800/80 shadow-2xl backdrop-blur-sm">
+        <div className="text-center max-w-md mx-auto p-8 rounded-3xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 shadow-2xl backdrop-blur-sm">
           {/* Empty Icon */}
-          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-zinc-800/60 border border-zinc-700/50 flex items-center justify-center text-rose-500/70 shadow-inner">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-rose-50 dark:bg-zinc-800/60 border border-rose-200 dark:border-zinc-700/50 flex items-center justify-center text-rose-500 dark:text-rose-500/70 shadow-inner">
             <svg
               className="w-10 h-10"
               fill="none"
@@ -46,10 +46,10 @@ export default function TvShowFavorite() {
             </svg>
           </div>
 
-          <h2 className="text-2xl font-bold text-white tracking-tight mb-2">
+          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white tracking-tight mb-2">
             Belum Ada Serial Favorit
           </h2>
-          <p className="text-sm text-zinc-400 mb-8 leading-relaxed">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
             Anda belum menambahkan serial TV apa pun ke daftar favorit. Jelajahi
             katalog sekarang dan simpan serial kesukaan Anda!
           </p>
@@ -82,34 +82,34 @@ export default function TvShowFavorite() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       {/* Header Halaman */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-zinc-800">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-semibold mb-3">
             <svg className="w-3.5 h-3.5 fill-rose-500" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
             Koleksi Pribadi
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
             Serial TV Favorit
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
             Daftar serial yang telah Anda tandai untuk ditonton kapan saja.
           </p>
         </div>
 
         {/* Counter Badge & Tombol Kembali */}
         <div className="flex items-center gap-3">
-          <span className="px-3.5 py-1.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm font-medium text-zinc-300">
+          <span className="px-3.5 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-sm font-medium text-zinc-700 dark:text-zinc-300">
             Total:{" "}
-            <strong className="text-rose-400 font-bold">
+            <strong className="text-rose-600 dark:text-rose-400 font-bold">
               {tvShowFavorite.length}
             </strong>{" "}
             Serial
           </span>
           <Link
             to="/"
-            className="px-4 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium transition-colors"
+            className="px-4 py-1.5 rounded-xl bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white text-sm font-medium transition-colors"
           >
             + Tambah Serial
           </Link>
@@ -125,10 +125,10 @@ export default function TvShowFavorite() {
           return (
             <div
               key={showFavorite.id}
-              className="group relative flex flex-col rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-rose-950/20"
+              className="group relative flex flex-col rounded-2xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-rose-950/10 dark:hover:shadow-rose-950/20"
             >
               {/* === Poster Container === */}
-              <div className="relative aspect-16/10 sm:aspect-3/4 w-full overflow-hidden bg-zinc-950">
+              <div className="relative aspect-16/10 sm:aspect-3/4 w-full overflow-hidden bg-zinc-200 dark:bg-zinc-950">
                 {posterUrl ? (
                   <img
                     src={posterUrl}
@@ -137,7 +137,7 @@ export default function TvShowFavorite() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-950 text-zinc-600 p-4 text-center">
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-200 dark:bg-zinc-950 text-zinc-400 dark:text-zinc-600 p-4 text-center">
                     <svg
                       className="w-10 h-10 mb-2 stroke-current"
                       fill="none"
@@ -225,7 +225,7 @@ export default function TvShowFavorite() {
                   </span>
                   <h3
                     title={showFavorite.name}
-                    className="text-lg font-bold text-white tracking-tight line-clamp-1 group-hover:text-rose-400 transition-colors"
+                    className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight line-clamp-1 group-hover:text-rose-500 dark:group-hover:text-rose-400 transition-colors"
                   >
                     {showFavorite.name}
                   </h3>
@@ -237,7 +237,7 @@ export default function TvShowFavorite() {
                     {showFavorite.genres.map((genre) => (
                       <span
                         key={genre}
-                        className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-zinc-800/80 text-zinc-300 border border-zinc-700/60"
+                        className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/60"
                       >
                         {genre}
                       </span>
@@ -246,18 +246,18 @@ export default function TvShowFavorite() {
                 )}
 
                 {/* Summary / Sinopsis */}
-                <p className="text-xs text-zinc-400 line-clamp-3 leading-relaxed mb-4 flex-1">
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-3 leading-relaxed mb-4 flex-1">
                   {cleanSummary(showFavorite.summary)}
                 </p>
 
                 {/* Action Bar Bawah */}
-                <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between">
                   <span className="text-[11px] text-zinc-500">
                     Tersimpan di Watchlist
                   </span>
                   <button
                     onClick={() => removeFavorite(showFavorite.id)}
-                    className="text-xs font-semibold text-zinc-400 hover:text-rose-400 transition-colors flex items-center gap-1"
+                    className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-rose-500 dark:hover:text-rose-400 transition-colors flex items-center gap-1"
                   >
                     <span>Hapus</span>
                   </button>

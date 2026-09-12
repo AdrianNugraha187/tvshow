@@ -18,3 +18,14 @@ export async function fetchShow(searchTvShow?: string): Promise<Show[]> {
 
   return data as Show[];
 }
+
+export async function fetchShowDetail(id: string): Promise<Show> {
+  const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
+
+  if (!res.ok) {
+    throw new Error(`HTTP Error! ${res.status} ${res.statusText}`);
+  }
+
+  const data = await res.json();
+  return data as Show;
+}

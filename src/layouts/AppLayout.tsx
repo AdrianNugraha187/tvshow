@@ -17,7 +17,7 @@ export default function AppLayout() {
   }, [theme]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-red-600 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-100 dark:text-zinc-960/60 font-sans antialiased selection:bg-red-600 selection:text-white">
       {/* 
         ScrollRestoration: Otomatis mengembalikan scroll layar 
         ke posisi paling atas saat berpindah halaman antar route

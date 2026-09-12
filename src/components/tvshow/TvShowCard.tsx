@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Show } from "../../types/tvShowType";
 
 interface CardProps {
@@ -31,9 +32,12 @@ export default function TvShowCard({
   const posterUrl = show.image?.medium || show.image?.original;
 
   return (
-    <div className="group relative flex flex-col h-full rounded-2xl bg-zinc-900/90 border border-zinc-800/80 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-red-950/20 transition-all duration-300 hover:border-zinc-700">
+    <Link
+      to={`/tvshowdetail/${show.id}`}
+      className="group relative flex flex-col h-full rounded-2xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800/80 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-red-950/10 dark:hover:shadow-red-950/20 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700"
+    >
       {/* ================= POSTER & OVERLAYS ================= */}
-      <div className="relative aspect-2/3 w-full overflow-hidden bg-zinc-950">
+      <div className="relative aspect-2/3 w-full overflow-hidden bg-zinc-200 dark:bg-zinc-950">
         {posterUrl ? (
           <img
             src={posterUrl}
@@ -43,7 +47,7 @@ export default function TvShowCard({
           />
         ) : (
           /* Placeholder bila serial tidak memiliki poster gambar */
-          <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-950 text-zinc-600 p-4 text-center">
+          <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-200 dark:bg-zinc-950 text-zinc-400 dark:text-zinc-600 p-4 text-center">
             <svg
               className="w-12 h-12 mb-2 stroke-current"
               fill="none"
@@ -124,7 +128,7 @@ export default function TvShowCard({
         {/* Judul TV Show */}
         <h3
           title={show.name}
-          className="text-base font-bold text-white tracking-tight line-clamp-1 group-hover:text-red-400 transition-colors"
+          className="text-base font-bold text-zinc-900 dark:text-white tracking-tight line-clamp-1 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors"
         >
           {show.name}
         </h3>
@@ -135,7 +139,7 @@ export default function TvShowCard({
             {show.genres.slice(0, 3).map((genre) => (
               <span
                 key={genre}
-                className="px-2 py-0.5 text-[10px] font-medium rounded bg-zinc-800 text-zinc-300 border border-zinc-700/60"
+                className="px-2 py-0.5 text-[10px] font-medium rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/60"
               >
                 {genre}
               </span>
@@ -144,10 +148,10 @@ export default function TvShowCard({
         )}
 
         {/* Ringkasan Cerita (Summary) */}
-        <p className="mt-3 text-xs text-zinc-400 line-clamp-2 leading-relaxed flex-1">
+        <p className="mt-3 text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed flex-1">
           {cleanSummary}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

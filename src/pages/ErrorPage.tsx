@@ -1,3 +1,7 @@
 export default function ErrorPage() {
-  return <div>Page Not Found :(</div>;
+  return (
+    <div className="bg-zinc-50 dark:bg-zinc-950 text-zinc-100 dark:text-zinc-960/60">
+      Page Not Found :(
+    </div>
+  );
 }
